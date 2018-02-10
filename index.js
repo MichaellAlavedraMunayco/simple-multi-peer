@@ -39,6 +39,10 @@ class SimpleMultiPeer {
     });
   }
 
+  getPeer = (id) => {
+    return this.peers[id];
+  }
+
   /**
    * Signaller Events
    */
