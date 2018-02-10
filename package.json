@@ -1,6 +1,6 @@
 {
   "name": "@ok2ju/simple-multi-peer",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "WebRTC multi-peer made simple",
   "main": "./lib/index.js",
   "files": [
