@@ -1,22 +1,22 @@
 {
-  "name": "@ok2ju/simple-multi-peer",
+  "name": "simple-multi-peer",
   "version": "0.2.1",
   "description": "WebRTC multi-peer made simple",
-  "main": "./index.js",
+  "main": "index.js",
   "scripts": { },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ok2ju/simple-multi-peer.git"
+    "url": "https://github.com/MichaellAlavedraMunayco/simple-multi-peer.git"
   },
   "keywords": [
     "webrtc",
     "multi",
     "peer"
   ],
-  "author": "Alexey Vakulich <alexey.vakulich@gmail.com>",
+  "author": "Alavedra Munayco <f.michaell.a.m@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ok2ju/simple-multi-peer/issues"
+    "url": "https://github.com/MichaellAlavedraMunayco/simple-multi-peer/issues"
   },
   "dependencies": {
     "simple-peer": "^9.7.2",
