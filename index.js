@@ -1,5 +1,5 @@
 import io from '../../../socket.io-client';
-import SimplePeer from '../../../simple-peer';
+import SimplePeer from '../../../simple-peer/simplepeer.min';
 
 class SimpleMultiPeer {
   constructor(options) {
