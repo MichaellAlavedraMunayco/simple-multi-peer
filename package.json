@@ -2,13 +2,9 @@
   "name": "simple-multi-peer",
   "version": "0.2.1",
   "description": "WebRTC multi-peer made simple",
-  "main": "./lib/index.js",
-  "files": [
-    "lib"
-  ],
+  "main": "index.js",
   "scripts": {
-    "clean": "rimraf lib",
-    "build": "babel index.js -d ./lib",
+    "build": "babel index.js",
     "prepare": "yarn clean && yarn build"
   },
   "repository": {
@@ -36,7 +32,6 @@
   "babel-cli": "^6.26.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
-    "rimraf": "^2.6.2",
     "yarn": "^1.22.4"
   }
 }
