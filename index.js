@@ -4,6 +4,7 @@ import SimplePeer from 'simple-peer';
 class SimpleMultiPeer {
 
     constructor(options) {
+
         this.signaller = io(options.server, options.connectionOptions || {});
 
         this._peerOptions = options.peerOptions || {};
@@ -11,10 +12,10 @@ class SimpleMultiPeer {
 
         this.callbacks = options.callbacks || {};
 
-        ['Connect', 'Disconnect', 'Signal', 'Peers'].forEach((event) => {
-            const callback = this['onSignaller' + event];
-            this.signaller.on(event.toLowerCase(), callback);
-        });
+        this.signaller.on("connect", () => { this.onSignallerConnect(); });
+        this.signaller.on("signal", (data) => { this.onSignallerSignal(data); });
+        this.signaller.on("peers", (peers) => { this.onSignallerPeers(peers); });
+        this.signaller.on("disconnect", () => { this.onSignallerDisconnect(); });
 
         this.peers = {};
     }
@@ -34,8 +35,10 @@ class SimpleMultiPeer {
     }
 
     send = (data) => {
+        console.log("Init send process");
         Object.keys(this.peers).forEach((id) => {
             this.peers[id].send(data);
+            console.log(`Peer ${id} send ${data}`);
         }, this);
     }
 
@@ -45,9 +48,7 @@ class SimpleMultiPeer {
         }, this);
     }
 
-    getPeer = (id) => {
-        return this.peers[id];
-    }
+    getPeer = (id) => { return this.peers[id]; }
 
     /**
      * Signaller Events
@@ -58,11 +59,9 @@ class SimpleMultiPeer {
     }
 
     onSignallerSignal = (data) => {
-        if (!this.peers[data.id]) {
-            const options = Object.assign({}, this._peerOptions);
-            this.peers[data.id] = new SimplePeer(options);
-            this.registerPeerEvents(this.peers[data.id], data.id);
-        }
+        const options = Object.assign({}, this._peerOptions);
+        this.peers[data.id] = new SimplePeer(options);
+        this.registerPeerEvents(this.peers[data.id], data.id);
         this.peers[data.id].signal(data.signal);
     }
 
@@ -86,7 +85,8 @@ class SimpleMultiPeer {
     }
 
     onPeerSignal = (id, signal) => {
-        this.signaller.emit('signal', { "id": id, "signal": signal });
+        console.log('signal ' + signal + ' from ' + id);
+        this.signaller.emit("signal", { "id": id, "signal": signal });
     }
 
     onPeerData = (id, data) => {
