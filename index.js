@@ -24,7 +24,7 @@ class SimpleMultiPeer {
   registerPeerEvents = (peer, id) => {
     ['Connect', 'Signal', 'Data', 'Stream', 'Close'].forEach((event) => {
       peer.on(event.toLowerCase(), this['onPeer' + event].bind(this, id));
-    });
+    }, this);
   }
 
   send = (data) => {
