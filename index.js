@@ -65,7 +65,7 @@ class SimpleMultiPeer {
       const options = Object.assign({ initiator: true }, this._peerOptions);
       this.peers[id] = new SimplePeer(options);
       this.registerPeerEvents(this.peers[id], id);
-    });
+    }, this);
   }
 
   onSignallerDisconnect = () => {}
