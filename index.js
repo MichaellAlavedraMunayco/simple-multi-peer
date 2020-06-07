@@ -30,13 +30,13 @@ class SimpleMultiPeer {
   send = (data) => {
     Object.keys(this.peers).forEach((id) => {
       this.peers[id].send(data);
-    });
+    }, this);
   }
 
   apply = (func, args) => {
     Object.keys(this.peers).forEach((id) => {
       this.peers[id][func].apply(this.peers[id], args);
-    });
+    }, this);
   }
 
   getPeer = (id) => {
